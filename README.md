@@ -53,6 +53,10 @@
 
 ## An ERD for your app
 
+##### ERD Diagram
+
+![db-schema](https://user-images.githubusercontent.com/37489963/67643541-d5c8c680-f96c-11e9-80ed-92d4f5639c09.png)
+
 ## Explain the different high-level components (abstractions) in your app
 
 ## Detail any third party services that your app will use
