@@ -46,6 +46,10 @@ for i in 1..40
         category_id: category.id,
         condition_id: condition.id,
     )
+
+    temp_prod_file = Down.download(Faker::LoremPixel.image + "?random=" + rand(1..1000).to_s)
+    prod.picture.attach(io: temp_prod_file, filename: File.basename(temp_prod_file.path))
+
     prod.save!
     puts "Created a #{category.name} item called #{prod.name} belonging to #{user.name} in #{condition.name} condition."
 end

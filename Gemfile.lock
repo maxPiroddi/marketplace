@@ -105,6 +105,8 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
+    down (5.0.0)
+      addressable (~> 2.5)
     erubi (1.9.0)
     execjs (2.7.0)
     faker (2.6.0)
@@ -257,6 +259,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise (~> 4.7)
   dotenv-rails (~> 2.7)
+  down (~> 5.0)
   faker (~> 2.6)
   jbuilder (~> 2.5)
   jquery-rails
