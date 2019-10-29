@@ -1,4 +1,4 @@
-<div class="navbar navbar-default">
+<!-- <div class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <%= link_to("Muso's Market", root_path, class: "navbar-brand") %>
@@ -16,3 +16,43 @@
     <% end %>
   </div>
 </div>
+-->
+
+<nav class="navbar navbar-light">
+    <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to("Musos Market", root_path, class: "navbar-brand") %>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <% if user_signed_in? %>
+              <li><%= link_to("Sign Out", destroy_user_session_path, method: :delete) %></li>
+              <li><%= link_to("New Listing", new_product_path) %></li>
+            <% else %>
+              <li><%= link_to("Sign Up", new_user_registration_path, class: "nav-item nav-link") %></li>
+              <li><%= link_to("Log In", new_user_session_path, class: "nav-item nav-link") %></li>
+            <% end %>
+          </ul>
+
+          <form class="navbar-form navbar-left" action="<%= products_path %>" method="GET">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search...">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+          </form>
+
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li><%= link_to("My Account", root_path) %>
+            <% end %>
+          </ul>
+        </div>
+    </div>
+</nav>

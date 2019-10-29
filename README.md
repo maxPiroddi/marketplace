@@ -6,22 +6,48 @@
 
 [GitHub Repository](https://github.com/maxPiroddi/marketplace)
 
-## Identification of the problem you are trying to solve by building this particular marketplace app
+***
 
-## Why is it a problem that needs solving
+***
 
-## Description of your marketplace app (website), including:
+## Instructions for local use
 
-- Purpose
-- Functionality / features
-- Sitemap
-- Screenshots
-- Target audience
-- Tech stack (e.g. html, css, deployment platform, etc)
+Clone repository:
+
+    git clone https://github.com/maxPiroddi/marketplace
+
+Install gems:
+
+    bundle install
+
+Create and Initialize Database
+
+    rails db:create
+    rails db:setup
+
+Run server & navigate to http://localhost:3000/
+
+***
+
+***
+
+In Australia, musical instrument & accessory sales vary between $400 and $600 million per annum, a huge market with a problematic supply. As there are few Australian owned and run manufacturers, the vast majority of musical equipment is imported from overseas. Due to the resulting higher prices & lower availability of these items, the Australian instrument market is full of used & second hand gear. There is not, however, a dedicated marketplace for these items to be bought and sold for Australian customers.
+
+MusoMarket will be a marketplace aimed at providing the best buying & selling experience for its users, tailored specifically to the needs of musicians which are often overlooked when using other public marketplaces.
+
+***
+
+MusoMarket is, primarily, an application which allows users to buy and sell second hand musical gear, handling the process from listing to sale. The site features fully CRUD products & user accounts, product categorization, product condition markers, Australian shipping cost generation via Australia Post, seller reviews to ensure integrity and secure payment processing via Stripe along with transactional emails via Mailgun.
+
+The application is built with Ruby on Rails, primarily using HTML, CSS and Ruby, with some Javascript for functionality. Development of the app has used Git/GitHub for version control, Trello for task tracking, Adobe XD/Photoshop for wireframing/planning, and Heroku for deployment.
+
+##### Sitemap
+
+![market-sitemap](https://user-images.githubusercontent.com/37489963/67644554-8f786500-f976-11e9-92cf-20752dc5488c.png)
 
 ## User stories for your app
 
-## Wireframes for your app
+## Wireframing
 
 ##### Home Page
 

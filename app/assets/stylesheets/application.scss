@@ -16,3 +16,17 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+.navbar-toggle .icon-bar {
+    background-color: #052B54;
+}
+
+.navbar .navbar-light {
+    background-color: #f8f8f8;
+}
+
+.navbar-brand {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.8em;
+}

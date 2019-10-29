@@ -1,4 +1,4 @@
-<%= form_with(model: product, local: true) do |form| %>
+<%= simple_form_for @product do |form| %>
   <% if product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
@@ -11,27 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <%= form.input :name %>
+  <!--<div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
+  </div>-->
+  <%= form.input :price %>
+  <!--<div class="field">
     <%= form.label :price %>
     <%= form.number_field :price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_area :location %>
-  </div>
-
-  <div class="field">
+  </div>-->
+  <%= form.input :location, label: "Postcode" %>
+  <!--<div class="field">
+    <%= form.label "Postcode" %>
+    <%= form.number_field :location %>
+  </div>-->
+  <%= form.input :description %>
+  <!--<div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
+  </div>-->
+  <%= form.button :submit %>
+  <!--<div class="actions">
     <%= form.submit %>
-  </div>
+  </div>-->
 <% end %>
