@@ -1,9 +1,8 @@
 <%= render("shared/topnav") %>
 <div class="container">
-    <h1>New Product</h1>
-    <div class="container">
-    <%= render 'form', product: @product %>
+    <div class="col-md-8 col-md-offset-2 form-bg">
+        <h1>New Product</h1>
 
-    <%= link_to 'Back', products_path %>
+        <%= render 'form', product: @product %>
     </div>
 </div>

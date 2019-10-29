@@ -12,8 +12,34 @@
   <% end %>
 
   <%= form.input :name %>
-  <%= form.input :price %>
-  <%= form.input :location, label: "Postcode" %>
+  <%= form.input :price, as: "integer", class: "input-num" %>
+  <%= form.input :location, label: "Postcode", as: "integer", class: "input-num" %>
   <%= form.input :description %>
-  <%= form.button :submit %>
+  <%= form.file_format :picture, :label => "Pictures of your item" %>
+  <%= form.input :pictures, as: "file", accept: "image/png,image/gif,image/jpeg,image/jpg" %>
+  <%= form.button :submit, class: "btn btn-default" %>
 <% end %>
+<!-- 
+<%= form_with model: product, local: true do |form| %>
+    <div>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+    </div>
+    <div>
+        <%= form.label :location %>
+        <%= form.number_field :description, min: 1000, max: 4999 %>
+    </div>
+    <div>
+        <%= form.label :price, "Price (in cents)" %>
+        <%= form.number_field :price, min: 0 %>
+    </div>
+    <div>
+        <%= form.text_area :description %>
+    </div>
+    <div>
+        <%= form.label :picture %>
+        <%= form.file_field :picture, accept: "image/png,image/gif,image/jpeg,image/jpg" %>
+    </div>
+    <%= form.submit %>
+<% end %>
+-->

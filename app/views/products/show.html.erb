@@ -2,6 +2,8 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
+  <td><%= image_tag @product.picture if @product.picture.attached? %></td>
+
   <p>
     <strong>Name:</strong>
     <%= @product.name %>
