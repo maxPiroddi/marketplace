@@ -1,5 +1,5 @@
 .jumbotron {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), #F4D35E), url(<%= asset_path "hero.jpg" %>);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgb(8, 58, 112)), url(image-path("hero.jpg"));
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -16,9 +16,25 @@
 }
 
 .random-product {
-    text-align: center;
     font-size: 1em;
-    color: rgb(206, 199, 199);
+    font-style: italic;
+    display: flex;
+    justify-content: center;
+
+    a {
+        color: #d9d9d9;
+
+        &:visited{
+            color: #d9d9d9;
+        }
+        &:hover{
+            color: #bdbdbd;
+        }
+        &:active{
+            color: #bdbdbd;
+        }
+    }
+
 }
 
 .category-box h2 {

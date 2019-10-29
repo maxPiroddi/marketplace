@@ -9,78 +9,15 @@
                 <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
             </div>
         </form>
-        <p class="random-product">Maybe try</p>        
+        <p class="random-product"><%= link_to("Maybe try '#{@random_product.name}'", product_path(@random_product)) %></p>
     </div>
     <div class="category-box">
         <h2 class="display-4">Shop by Category</h2>
     </div>
+
     <div class="row category-row">
-
-        <div class="col-sm-2">
-            <%= link_to(root_path) do %>
-                <div class="card category-card">
-                  <div class="card-body">
-                    <%= image_tag "category-icons/guitar.svg", alt: "Guitar Logo", class: "category-logo" %>
-                    <h5 class="card-title">Guitars</h5>
-                  </div>
-                </div>
-            <% end %>
-        </div>
-
-        <div class="col-sm-2">
-            <%= link_to(root_path) do %>
-                <div class="card category-card">
-                  <div class="card-body">
-                    <%= image_tag "category-icons/bass.svg", alt: "Bass Logo", class: "category-logo" %>
-                    <h5 class="card-title">Bass Guitars</h5>
-                  </div>
-                </div>
-            <% end %>
-        </div>
-
-        <div class="col-sm-2">
-            <%= link_to(root_path) do %>
-                <div class="card category-card">
-                    <div class="card-body">
-                        <%= image_tag "category-icons/drum.svg", alt: "Drum Logo", class: "category-logo" %>
-                        <h5 class="card-title">Drums & Percussion</h5>
-                    </div>
-                </div>
-            <% end %>
-        </div>
-
-        <div class="col-sm-2">
-            <%= link_to(root_path) do %>
-                <div class="card category-card">
-                    <div class="card-body">
-                        <%= image_tag "category-icons/synth.svg", alt: "Synth Logo", class: "category-logo" %>
-                        <h5 class="card-title">Synths & Keyboards</h5>
-                    </div>
-                </div>
-            <% end %>
-        </div>
-
-        <div class="col-sm-2">
-            <%= link_to(root_path) do %>
-                <div class="card category-card">
-                    <div class="card-body">
-                        <%= image_tag "category-icons/amp.svg", alt: "Amp Logo", class: "category-logo" %>
-                        <h5 class="card-title">Amplifiers</h5>
-                    </div>
-                </div>
-            <% end %>
-        </div>
-
-        <div class="col-sm-2">
-            <%= link_to(root_path) do %>
-                <div class="card category-card">
-                    <div class="card-body">
-                        <%= image_tag "category-icons/pro-audio.svg", alt: "Pro Audio Logo", class: "category-logo" %>
-                        <h5 class="card-title">Pro Audio</h5>
-                    </div>
-                </div>
-            <% end %>
-        </div>
-
+        <!-- Render category partial -->
+        <%= render("categories") %>
     </div>
+
 </div>

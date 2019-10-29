@@ -2,7 +2,7 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
-  <td><%= image_tag @product.picture if @product.picture.attached? %></td>
+  <%= image_tag @product.picture if @product.picture.attached? %>
 
   <p>
     <strong>Name:</strong>

@@ -1,37 +1,37 @@
 <%= render("shared/topnav") %>
 <div class="container">
   <p id="notice"><%= notice %></p>
-
-  <h1>Products</h1>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Location</th>
-        <th>Description</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @products.each do |product| %>
-        <tr>
-          <td><%= image_tag product.picture if product.picture.attached? %>
-          <td><%= product.name %></td>
-          <td><%= product.price %></td>
-          <td><%= product.location %></td>
-          <td><%= product.description %></td>
-          <td><%= link_to 'Show', product %></td>
-          <td><%= link_to 'Edit', edit_product_path(product) %></td>
-          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <br>
+<!--
+  <% @products.each do |product| %>
+    <div class="col-md-4">
+        <div class="product">
+          <div class="image-card" style="background-image:<%= image_tag product.picture if product.picture.attached? %> ">
+          </div>
+          <h2 class="product-name"><%= product.name %></h3>
+          <%= link_to("View Product", product_path(product), class: "btn-custom") %>
+        </div>
+    </div>
+  <% end %>
+-->
+  <div class="row">
+    <%= @products.each do |product| %>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <%= image_tag product.picture if product.picture.attached? %>
+          <div class="caption">
+            <h3><%= product.name %></h3>
+            <div class="condition-container">
+                <%= link_to("View Product", product_path(product), class: "btn btn-default") %>
+                <!-- GET THIS FIXED - SHOULD BE ABLE TO CALL product.condition.name INSTEAD OF THIS ROUNDABOUT -->
+                <%= p Condition.find(product.condition_id).name + " condition" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
   <%= link_to 'New Product', new_product_path %>
 </div>
+
+Condition.find(product.condition_id).name
