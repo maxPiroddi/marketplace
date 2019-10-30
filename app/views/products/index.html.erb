@@ -1,18 +1,7 @@
 <%= render("shared/topnav") %>
 <div class="container">
   <p id="notice"><%= notice %></p>
-<!--
-  <% @products.each do |product| %>
-    <div class="col-md-4">
-        <div class="product">
-          <div class="image-card" style="background-image:<%= image_tag product.picture if product.picture.attached? %> ">
-          </div>
-          <h2 class="product-name"><%= product.name %></h3>
-          <%= link_to("View Product", product_path(product), class: "btn-custom") %>
-        </div>
-    </div>
-  <% end %>
--->
+
   <div class="row">
     <%= @products.each do |product| %>
       <div class="col-sm-6 col-md-4">
@@ -30,8 +19,4 @@
       </div>
     <% end %>
   </div>
-
-  <%= link_to 'New Product', new_product_path %>
 </div>
-
-Condition.find(product.condition_id).name
