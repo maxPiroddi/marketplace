@@ -39,7 +39,7 @@ for i in 1..40
 
     prod = Product.new(
         name: Faker::Beer.name,
-        price: rand(100..1000),
+        price: rand(5000..99900),
         location: rand(1000..4999),
         description: Faker::Lorem.sentence,
         user_id: user.id,

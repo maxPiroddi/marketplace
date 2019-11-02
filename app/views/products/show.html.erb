@@ -1,29 +1,51 @@
 <%= render("shared/topnav") %>
 <div class="container">
-  <p id="notice"><%= notice %></p>
+  <div class=".col-xs-12 .col-md-8">
+    <div class="product-show">
+        <p id="notice"><%= notice %></p>
+        <div class="product-box">
+          <div class="product-details">
+            <h2><%= @product.name %></h2>
+            <p class="product-posted-by">Listed by <%= @product.user.email %> <%= time_ago_in_words(@product.created_at) %> ago.</p>
+            <p>Location: <%= @product.location %></p>
+            <p>Description: <%= @product.description %></p>
+            <h3>Price: <%= number_to_currency(@product.price / 100.0) %></h3>
+            <% if user_signed_in? %>
+              <h5>Shipping: <%= number_to_currency(@delivery_cost) %></h5>
+              <h5><%= @delivery_time %></h5>
+            <% end %>
+            <p class="product-posted-by">All currencies are $AUD</p>
+            <% if user_signed_in? %>
+              <% if @product.user_id == current_user.id%>
+                <%= link_to("Edit", edit_product_path(@product), class: "btn btn-default") %>
+                <%= link_to("Delete", product_path(@product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default") %>
+              <% else %>
 
-  <%= image_tag @product.picture if @product.picture.attached? %>
+                <button data-stripe="payment" class="btn btn-default">Buy Now</button>
 
-  <p>
-    <strong>Name:</strong>
-    <%= @product.name %>
-  </p>
+                <script src="https://js.stripe.com/v3/"></script>
 
-  <p>
-    <strong>Price:</strong>
-    <%= @product.price %>
-  </p>
+				<script>
+					document
+					.querySelector("[data-stripe='payment']")
+					.addEventListener("click", () => {
+						const stripe = Stripe(
+						"<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+						);
 
-  <p>
-    <strong>Location:</strong>
-    <%= @product.location %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @product.description %>
-  </p>
-
-  <%= link_to 'Edit', edit_product_path(@product) %> |
-  <%= link_to 'Back', products_path %>
+						stripe.redirectToCheckout({
+						sessionId: "<%= @session_id %>"
+						});
+					});
+				</script>
+              <% end %>
+            <% end %>
+          </div>
+    
+          <div class="product-image-box">
+            <%= image_tag((@product.picture if @product.picture.attached?), class: "image-box")%>
+          </div>
+        </div>
+    </div>
+  </div>
 </div>

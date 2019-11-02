@@ -1,3 +1,39 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// BELOW IS DESKTOP STYLING - CHUCK IT ALL IN A MEDIA QUERY
+.product-show {
+    box-sizing: border-box;
+	background-color: #717171;
+	padding: 2.0em 1.5em;
+	color: #fff;
+	font-family: 'Muli', sans-serif;
+	font-weight: 300;
+	margin-top: 8%;
+    
+    .product-posted-by {
+		color: #eee;
+		font-size: 0.9em;
+		font-style: italic;
+	}
+
+	.product-details {
+		margin-right: 20px;
+		word-break:break-all;
+	}
+
+	.image-box {
+		width: 300px;
+		height: 300px;
+	}
+}
+
+@media (min-width: 700px) {
+	.product-box {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+	}
+}

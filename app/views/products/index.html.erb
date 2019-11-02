@@ -3,7 +3,7 @@
   <p id="notice"><%= notice %></p>
 
   <div class="row">
-    <%= @products.each do |product| %>
+    <% @products.each do |product| %>
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <%= image_tag product.picture if product.picture.attached? %>

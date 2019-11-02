@@ -77,5 +77,7 @@ gem "rack-cors", "~> 1.0"
 
 gem "aws-sdk-s3", "~> 1.52"
 gem "dotenv-rails", "~> 2.7"
-
+gem "httparty"
 gem "down", "~> 5.0"
+
+gem "http", "~> 4.2"

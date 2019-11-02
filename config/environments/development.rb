@@ -62,4 +62,7 @@ Rails.application.configure do
   # Devise required
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # sendgrid --> Set up a mailer
+
+  config.gem "httparty"
+
 end
