@@ -6,7 +6,7 @@
         <div class="product-box">
           <div class="product-details">
             <h2><%= @product.name %></h2>
-            <p class="product-posted-by">Listed by <%= @product.user.email %> <%= time_ago_in_words(@product.created_at) %> ago.</p>
+            <p class="product-posted-by">Listed by <%= @product.user.name %> | <%= time_ago_in_words(@product.created_at) %> ago.</p>
             <p>Location: <%= @product.location %></p>
             <p>Description: <%= @product.description %></p>
             <h3>Price: <%= number_to_currency(@product.price / 100.0) %></h3>
@@ -25,19 +25,19 @@
 
                 <script src="https://js.stripe.com/v3/"></script>
 
-				<script>
-					document
-					.querySelector("[data-stripe='payment']")
-					.addEventListener("click", () => {
-						const stripe = Stripe(
-						"<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
-						);
+                <script>
+                  document
+                  .querySelector("[data-stripe='payment']")
+                  .addEventListener("click", () => {
+                    const stripe = Stripe(
+                    "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+                    );
 
-						stripe.redirectToCheckout({
-						sessionId: "<%= @session_id %>"
-						});
-					});
-				</script>
+                    stripe.redirectToCheckout({
+                    sessionId: "<%= @session_id %>"
+                    });
+                  });
+                </script>
               <% end %>
             <% end %>
           </div>
@@ -49,3 +49,4 @@
     </div>
   </div>
 </div>
+<%= render("shared/footer") %>

@@ -1,3 +1,19 @@
 <%= render("shared/topnav") %>
 
-<h1>Hello User!</h1>
+<div class="container">
+    <div class=".col-xs-6 .col-md-6 account-box">
+        <div class="account-name">
+            <p id="notice"><%= notice %></p>
+
+            <h1 id="account-title">Hello <%= @account.name.split.first %>!</h1>
+        </div>
+        <div class="account-details">
+            <p>Email: <%= @account.email %></p>
+            <p>Postcode: <%= @account.postcode %></p>
+        </div>
+    </div>
+
+
+
+    <%= render("account_products") %>
+</div>

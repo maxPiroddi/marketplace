@@ -1,16 +1,17 @@
 class PagesController < ApplicationController
-    before_action :set_user, only: [:account]
+    # before_action :set_user, only: [:account]
 
     def home
         @random_product = Product.order('RANDOM()').first
     end
 
     def account
+        @account = current_user
     end
 
     private
 
-        def set_user
-            @user_account = User.find(params[:id])
-        end
+        # def set_user
+        #     @user_account = User.find(params[:id])
+        # end
 end

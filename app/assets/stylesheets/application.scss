@@ -18,6 +18,9 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
+body {
+    background-color: #b3cee6;
+}
 .navbar-toggle .icon-bar {
     background-color: #052B54;
 }
@@ -33,4 +36,14 @@
 
 .container .form-container {
     width: 60%;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #6fa0cb;
+    color: white;
+    text-align: center;
 }

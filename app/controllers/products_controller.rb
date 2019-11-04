@@ -14,15 +14,16 @@ class ProductsController < ApplicationController
     if user_signed_in?
       seller_postcode = @product.location
       buyer_postcode = current_user.postcode
-
-      response = HTTP.headers("AUTH-KEY" => "c22b6dc6-5194-406e-9e80-825d64573d1a")
-                  .get("https://digitalapi.auspost.com.au/postage/parcel/domestic/calculate.json", :params => {:length => "15", :width => "10", :height => "5", :weight => "1", :from_postcode => "#{seller_postcode}", :to_postcode => "#{buyer_postcode}", :service_code => "AUS_PARCEL_REGULAR"})
+  
+      response = HTTP.headers("AUTH-KEY" => Rails.application.credentials.dig(:auspost, :access_key_id))
+                  .get("https://digitalapi.auspost.com.au/postage/parcel/domestic/calculate.json", :params => {:length => "20", :width => "15", :height => "10", :weight => "2", :from_postcode => "#{seller_postcode}", :to_postcode => "#{buyer_postcode}", :service_code => "AUS_PARCEL_REGULAR"})
 
 	    data = JSON.parse(response.body)
       @delivery_cost = data["postage_result"]["total_cost"]
       @delivery_time = data["postage_result"]["delivery_time"]
 
     @full_cost = @product.price + (@delivery_cost.to_f * 100)
+    
     session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         customer_email: current_user.email,
@@ -39,7 +40,8 @@ class ProductsController < ApplicationController
                 listing_id: @product.id
             }
         },
-        success_url: "#{root_url}payments/success?userId=#{current_user.id}&listingId=#{@product.id}",
+        #?userId=#{current_user.id}&listingId=#{@product.id}"
+        success_url: "#{root_url}payments/success",
         cancel_url: "#{root_url}products"
     )
 
