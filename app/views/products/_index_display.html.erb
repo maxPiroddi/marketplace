@@ -1,0 +1,14 @@
+<% @products.each do |product| %>
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <%= image_tag product.picture if product.picture.attached? %>
+            <div class="caption">
+                <h3><%= product.name %></h3>
+                <div class="condition-container">
+                    <%= link_to("View Product", product_path(product), class: "btn btn-default") %>
+                    <%= product.condition.name %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

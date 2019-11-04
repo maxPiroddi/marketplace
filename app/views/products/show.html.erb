@@ -10,13 +10,13 @@
             <p>Location: <%= @product.location %></p>
             <p>Description: <%= @product.description %></p>
             <h3>Price: <%= number_to_currency(@product.price / 100.0) %></h3>
-            <% if user_signed_in? %>
+            <% if user_signed_in? && current_user != @product.user %>
               <h5>Shipping: <%= number_to_currency(@delivery_cost) %></h5>
               <h5><%= @delivery_time %></h5>
             <% end %>
             <p class="product-posted-by">All currencies are $AUD</p>
             <% if user_signed_in? %>
-              <% if @product.user_id == current_user.id%>
+              <% if @product.user_id == current_user.id %>
                 <%= link_to("Edit", edit_product_path(@product), class: "btn btn-default") %>
                 <%= link_to("Delete", product_path(@product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default") %>
               <% else %>

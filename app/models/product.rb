@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
     belongs_to :user, optional: true
-    has_one :condition
-    has_one :category
+    belongs_to :condition
+    belongs_to :category
     has_one_attached :picture
 end

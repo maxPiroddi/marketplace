@@ -1,5 +1,28 @@
-<div class="panel">
-    <h3>Current Listings</h3>
+<h3>Current Listings</h3>
+<% @account.products.each do |product| %>
+    <div class="panel">
+            <div class="row" > 
+                <div class="col-sm-12 col-md-12">
+                    <div class="listing-box">
+                        <%= image_tag((product.picture if product.picture.attached?), class: "account-img")%>
+                        <div>
+                            <h3><%= link_to product.name, product_path(product) %></h3>
+                            <h4>Price: <%= number_to_currency(product.price / 100 ) %>
+                        </div>
+                        <div>
+                            <h4>Description</h4>
+                            <p><%= product.description %></p>
+                        </div>
+                        <div>
+                            <%= link_to("Edit", edit_product_path(product), class: "btn btn-default") %>
+                            <%= link_to("Delete", product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default") %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+<% end %>
 
-    
-</div>
+#   MAKE EACH LISTING SINGLE LINE, LIST NAME PRICE CONDITION & CATEGORY, WITH THE ENTIRE DIV BEING A LINK TO THE SHOW PAGE
+#   INCLUDE AN EDIT AND DELETE BUTTON
+#   USE FLEX TO ALLOW JUSTIFY AROUND/BETWEEN TO SPACE THE BOYS NICELY

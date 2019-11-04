@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   def show
 
-    if user_signed_in?
+    if user_signed_in? && current_user != @product.user
       seller_postcode = @product.location
       buyer_postcode = current_user.postcode
   

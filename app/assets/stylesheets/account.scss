@@ -17,3 +17,14 @@
         margin: auto;
     }
 }
+
+.account-img {
+    height: 150px;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.listing-box {
+    display: grid;
+    grid-template-columns: 15% 15% auto 15% 15%;
+}

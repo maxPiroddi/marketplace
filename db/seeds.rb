@@ -1,10 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   Condition, category & user are all required before creating products.
 
 conditions = Condition.create([
     { name: "Poor", description: "Poor condition items have functional problems that will usually require repair or work. " },
@@ -21,6 +15,7 @@ categories = Category.create([
     { name: "Amplifiers", description: "Guitar, keyboard & general audio amplifiers." },
     { name: "Pro Audio", description: "Professional audio equipment, such as PA systems & mixing desks." }
 ])
+
 for i in 1..40
     user = User.new(
         name: Faker::Name.unique.name,
@@ -31,6 +26,7 @@ for i in 1..40
     user.save!
     puts "Created user #{user.name}"
 end
+
 
 for i in 1..40
     user = User.order('RANDOM()').first
