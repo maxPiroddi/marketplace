@@ -16,5 +16,8 @@ class PaymentsController < ApplicationController
             product_id: listing_id,
             stripe_transaction_id: payment_id
         )
+        purchase_status = Product.find(listing_id)
+        purchase_status.update(purchased: true)
+        purchase_status.save
     end
 end

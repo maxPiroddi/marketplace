@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-    # before_action :set_user, only: [:account]
 
     def home
         @random_product = Product.order('RANDOM()').first
@@ -7,11 +6,7 @@ class PagesController < ApplicationController
 
     def account
         @account = current_user
+        # purchase_history = Payment.where(user_id: current_user).product_id
+        # purchased_items = 
     end
-
-    private
-
-        # def set_user
-        #     @user_account = User.find(params[:id])
-        # end
 end

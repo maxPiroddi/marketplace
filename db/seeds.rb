@@ -41,6 +41,7 @@ for i in 1..40
         user_id: user.id,
         category_id: category.id,
         condition_id: condition.id,
+        purchased: false
     )
 
     temp_prod_file = Down.download(Faker::LoremPixel.image + "?random=" + rand(1..1000).to_s)

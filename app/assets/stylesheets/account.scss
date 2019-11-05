@@ -25,6 +25,19 @@
 }
 
 .listing-box {
-    display: grid;
-    grid-template-columns: 15% 15% auto 15% 15%;
+
+
+    .account-button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        .btn {
+            margin-right: 1em;
+        }
+    }
+
+    .account-card {
+        background-color: #6fa0cb;
+    }
 }

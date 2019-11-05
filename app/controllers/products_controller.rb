@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   # GET /products
   def index
 
-    @products = Product.all.order("created_at DESC")
+    @products = Product.where("purchased = false").order("created_at DESC")
 
 
     # S E A R C H  F U N C T I O N
@@ -81,7 +81,7 @@ class ProductsController < ApplicationController
   def create
     @product = current_user.products.create(product_params)
     @product.location = current_user.postcode
-
+    @product.purchased = false
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }

@@ -1,28 +1,63 @@
-<h3>Current Listings</h3>
-<% @account.products.each do |product| %>
-    <div class="panel">
-            <div class="row" > 
-                <div class="col-sm-12 col-md-12">
-                    <div class="listing-box">
-                        <%= image_tag((product.picture if product.picture.attached?), class: "account-img")%>
-                        <div>
-                            <h3><%= link_to product.name, product_path(product) %></h3>
-                            <h4>Price: <%= number_to_currency(product.price / 100 ) %>
-                        </div>
-                        <div>
-                            <h4>Description</h4>
-                            <p><%= product.description %></p>
-                        </div>
-                        <div>
-                            <%= link_to("Edit", edit_product_path(product), class: "btn btn-default") %>
-                            <%= link_to("Delete", product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default") %>
-                        </div>
+<div class="row">
+    <h3>Current Listings</h3>
+    <% @account.products.where("purchased = false").each do |product| %>
+        <div class="col-sm-6 col-md-4 listing-box">
+            <div class="thumbnail account-card">
+                <%= image_tag((product.picture if product.picture.attached?), class: "account-img")%>
+                <div class="caption">
+                    <h3><%= product.name %></h3>
+                    <h5>Price: <%= number_to_currency(product.price / 100) %></h5>
+                    <h5>Condition: <%= product.condition.name %></h5>
+                    <div class="account-button-container">
+                        <%= link_to("View", product_path(product), class: "btn btn-default") %>
+                        <%= link_to("Edit", edit_product_path(product), class: "btn btn-default") %>
+                        <%= link_to("Delete", product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default") %>
                     </div>
                 </div>
             </div>
-    </div>
-<% end %>
+        </div>
+    <% end %>
+</div>
 
-#   MAKE EACH LISTING SINGLE LINE, LIST NAME PRICE CONDITION & CATEGORY, WITH THE ENTIRE DIV BEING A LINK TO THE SHOW PAGE
-#   INCLUDE AN EDIT AND DELETE BUTTON
-#   USE FLEX TO ALLOW JUSTIFY AROUND/BETWEEN TO SPACE THE BOYS NICELY
+<div class="row">
+    <h3>Sold Items</h3>
+    <% @account.products.where("purchased = true").each do |product| %>
+        <div class="col-sm-6 col-md-4 listing-box">
+            <div class="thumbnail account-card">
+                <%= image_tag((product.picture if product.picture.attached?), class: "account-img")%>
+                <div class="caption">
+                    <h3><%= product.name %></h3>
+                    <h5>Price: <%= number_to_currency(product.price / 100) %></h5>
+                    <h5>Condition: <%= product.condition.name %></h5>
+                    <div class="account-button-container">
+                        <%= link_to("View", product_path(product), class: "btn btn-default") %>
+                        <%= link_to("Edit", edit_product_path(product), class: "btn btn-default") %>
+                        <%= link_to("Delete", product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default") %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+<div class="row">
+    <h3>Purchased Items</h3>
+    <%  %>
+        <div class="col-sm-6 col-md-4 listing-box">
+            <div class="thumbnail account-card">
+                <%= image_tag((product.picture if product.picture.attached?), class: "account-img")%>
+                <div class="caption">
+                    <h3><%= product.name %></h3>
+                    <h5>Price: <%= number_to_currency(product.price / 100) %></h5>
+                    <h5>Condition: <%= product.condition.name %></h5>
+                    <div class="account-button-container">
+                        <%= link_to("View", product_path(product), class: "btn btn-default") %>
+                        <%= link_to("Edit", edit_product_path(product), class: "btn btn-default") %>
+                        <%= link_to("Delete", product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default") %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+<%= render("shared/footer") %>
