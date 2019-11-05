@@ -1,3 +1,5 @@
 <%= render("shared/topnav") %>
 
-<h1>Hello World!</h1>
+<h1>Purchase success!</h1>
+
+<p>Receipt number: <%= @purchase.stripe_transaction_id %></p>

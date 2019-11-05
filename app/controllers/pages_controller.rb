@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
     def account
         @account = current_user
-        # purchase_history = Payment.where(user_id: current_user).product_id
-        # purchased_items = 
+        
+        @purchase = current_user.payments
     end
 end
