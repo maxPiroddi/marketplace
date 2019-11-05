@@ -94,3 +94,37 @@ The application is built with Ruby on Rails, primarily using HTML, CSS and Ruby,
 ## Provide your database schema design
 
 ## Describe the way tasks are allocated and tracked in your project
+
+## Search & Sort function Notes
+
+<!--    SEARCH FUNCTION
+          <%= form_with url: products_path, method: "get", local: true do |form| %>
+            <%= form.label :q %>
+            <%= form.text_field :q %>
+            
+            <%= form.label :sort %>
+            <%= form.select([["A-Z", "asc"], ["Z-A", "desc"]])
+            <%= form.submit "Search" %>
+
+          <% end %>
+-->
+<!--   Sort by doesn't care if it's text or integer, only the search     -->
+<!--    SORT FUNCTION
+          <%= link_to 'Sort by A-Z', products_path + "?sort=asc" %>
+          <%= link_to 'Sort by Z-A', products_path + "?sort=desc" %>
+-->
+
+## Pagination & Limits
+(In the view)
+<% for i in 1..@pages %>
+    <%= link_to "Page #{i}, products_path + "?page=#{i}" %>
+<% end %>
+
+(In the controller)
+limit = 5
+page = params[:page] ? params[:page].to_i : 1
+offset  = (page - 1) * limit
+
+@dogs = Dog.all
+@pages - @dogs.count / limit
+@dogs - @dogs[offset...(offset + limit)]

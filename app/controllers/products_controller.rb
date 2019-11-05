@@ -5,7 +5,22 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
+
     @products = Product.all.order("created_at DESC")
+
+
+    # S E A R C H  F U N C T I O N
+
+    # limit = 10
+    # sort = params[:sort] ? params[:sort] : "created_at DESC"
+
+    # if params[:search] && !params[:search].empty?
+    #   @products = Product.where("name LIKE ?", "%#{params[:search]}%").limit(limit)
+    # else
+    #   @products = Product.all.order("created_at DESC").limit(limit)
+    # end
+
+    # @products.order(name: sort.to_sym) if sort
   end
   
   # GET /products/1
