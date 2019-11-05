@@ -11,7 +11,6 @@
             <h3><%= product.name %></h3>
             <div class="condition-container">
                 <%= link_to("View Product", product_path(product), class: "btn btn-default") %>
-                <!-- GET THIS FIXED - SHOULD BE ABLE TO CALL product.condition.name INSTEAD OF THIS ROUNDABOUT -->
                 <%= p Condition.find(product.condition_id).name + " condition" %>
             </div>
           </div>
