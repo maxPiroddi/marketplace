@@ -7,7 +7,6 @@
         <%= form_with url: products_path, method: "GET", local: true do |form| %>
             <%= form.text_field :q, class: "form-control", id: "hero-search", placeholder: "Search..." %>
         <% end %>
-        
         <p class="random-product"><%= link_to("Maybe try '#{@random_product.name}'", product_path(@random_product)) %></p>
     </div>
     <div class="category-box">
@@ -15,7 +14,6 @@
     </div>
 
     <div class="row category-row">
-        <!-- Render category partial -->
         <%= render("categories") %>
     </div>
 

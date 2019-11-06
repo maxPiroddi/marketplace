@@ -8,6 +8,8 @@
             <h2><%= @product.name %></h2>
             <p class="product-posted-by">Listed by <%= @product.user.name %> | <%= time_ago_in_words(@product.created_at) %> ago.</p>
             <p>Location: <%= @product.location %></p>
+            <p>Condition: <%= @product.condition.name %></p>
+            <p>Category: <%= @product.category.name %></p>
             <p>Description: <%= @product.description %></p>
             <h3>Price: <%= number_to_currency(@product.price / 100.0) %></h3>
             <% if user_signed_in? && current_user != @product.user %>

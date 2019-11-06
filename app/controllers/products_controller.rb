@@ -3,27 +3,17 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show]
   before_action :set_user_product, only: [:edit, :update, :destroy]
 
-  # GET /products
   def index
+    # Default display if no params are passed.
+    @products = Product.where("purchased = false").order("created_at desc")
 
-    @products = Product.where("purchased = false").order("created_at DESC")
+    # Search logic -- Here we are searching w/ scopes defined in our method. Each of these allows us to filter what is found.
+    @products = @products.search(params[:search]) if params[:search].present?
+    @products = @products.condition_id(params[:condition_id]) if params[:condition_id].present?
+    @products = @products.category_id(params[:category_id]) if params[:category_id].present?
 
-
-    # S E A R C H  F U N C T I O N
-
-    # limit = 10
-    # sort = params[:sort] ? params[:sort] : "created_at DESC"
-
-    if params[:q]
-      @products = Product.where("name LIKE ?", "%#{params[:q]}%")
-    else
-      @products = Product.all.order("created_at DESC")
-    end
-
-    # @products.order(name: sort.to_sym) if sort
   end
   
-  # GET /products/1
   def show
 
     if user_signed_in? && current_user != @product.user
@@ -55,7 +45,6 @@ class ProductsController < ApplicationController
                 listing_id: @product.id
             }
         },
-        #?userId=#{current_user.id}&listingId=#{@product.id}"
         success_url: "#{root_url}payments/success",
         cancel_url: "#{root_url}products"
     )
@@ -64,24 +53,22 @@ class ProductsController < ApplicationController
     end
   end
 
-  # GET /products/new
   def new
     @product = Product.new
     @categories = Category.all
     @conditions = Condition.all
   end
 
-  # GET /products/1/edit
   def edit
     @categories = Category.all
     @conditions = Condition.all
   end
 
-  # POST /products
   def create
     @product = current_user.products.create(product_params)
     @product.location = current_user.postcode
     @product.purchased = false
+
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -91,7 +78,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /products/1
   def update
     respond_to do |format|
       if @product.update(product_params)
@@ -102,7 +88,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1
   def destroy
     @product = set_product
 
@@ -135,5 +120,4 @@ class ProductsController < ApplicationController
         end
     end
     
-
 end
