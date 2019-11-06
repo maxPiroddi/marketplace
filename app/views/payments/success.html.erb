@@ -1,5 +1,17 @@
 <%= render("shared/topnav") %>
+<div class="container">
+    <div class=".col-xs-12 .col-md-8 success">
+        <div class="success-details">
+            <h1>Purchase success!</h1>
+            <p>Estimated delivery timeframe: 
+            <p><strong>Your order number is: <%= @purchase.id %></strong></p>
+            <p>Transaction ID: <%= @purchase.stripe_transaction_id %></p>
+            <p>For any queries regarding your item, please contact <strong><%= @product.user.email %></strong></p>
+        </div>
+        <div class="shopping-button">
+            <%= link_to("Continue Shopping", products_path, class: "btn btn-default") %>
+        </div>
+    </div>
+     <%= render("purchased_item") %>
 
-<h1>Purchase success!</h1>
-
-<p>Receipt number: <%= @purchase.stripe_transaction_id %></p>
+</div>

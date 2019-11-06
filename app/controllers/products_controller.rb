@@ -35,6 +35,7 @@ class ProductsController < ApplicationController
 			session = stripe_checkout
 			@session_id = session.id
 		end
+		
 	end
 
 	def new

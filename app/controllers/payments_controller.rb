@@ -4,6 +4,8 @@ class PaymentsController < ApplicationController
     def success
         #   Finds the last purchase by user to display a successful purchase - (definitely not the most ideal method!)
         @purchase = Payment.where(user_id: current_user.id).last
+        @product = Product.find(@purchase.product_id)
+
     end
 
     def webhook
