@@ -5,7 +5,7 @@
     <div class="jumbotron">
         <h2 class="display-4">Let's find something great!</h2>
         <%= form_with url: products_path, method: "GET", local: true do |form| %>
-            <%= form.text_field :q, class: "form-control", id: "hero-search", placeholder: "Search..." %>
+            <%= form.text_field :search, class: "form-control", id: "hero-search", placeholder: "Search..." %>
         <% end %>
         <p class="random-product"><%= link_to("Maybe try '#{@random_product.name}'", product_path(@random_product)) %></p>
     </div>

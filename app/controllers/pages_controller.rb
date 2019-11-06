@@ -1,16 +1,13 @@
 class PagesController < ApplicationController
 
     def home
+        #   Pick a random product to suggest to users
         @random_product = Product.order('RANDOM()').first
-
-        if params[:q]
-            @products = Product.where("category_id = ?", "%#{params[:q]}%")
-        end
     end
 
     def account
+        #   Simple variable definitions
         @account = current_user
-        
         @purchase = current_user.payments
     end
 end
