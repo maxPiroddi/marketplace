@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-
-  root "pages#home"
+  root 'pages#home'
 
   # Devise & Product CRUD routes
   #
@@ -9,9 +8,8 @@ Rails.application.routes.draw do
 
   # Custom routes for user account, payment results & webhook
   #
-  get "/account/", to: "pages#account", as: "show_current_account"
-  get "/payments/success", to: "payments#success", as: "success_payment"
-  get "/payments/failure", to: "payments#failure", as: "failure_payment"
-  post "/payments/webhook", to: "payments#webhook"
-
+  get '/account/', to: 'pages#account', as: 'show_current_account'
+  get '/payments/success', to: 'payments#success', as: 'success_payment'
+  get '/payments/failure', to: 'payments#failure', as: 'failure_payment'
+  post '/payments/webhook', to: 'payments#webhook'
 end

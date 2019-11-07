@@ -10,16 +10,16 @@ class PaymentsController < ApplicationController
 
   def webhook
     #   Collect required variables
-    payment_id= params[:data][:object][:payment_intent]
+    payment_id = params[:data][:object][:payment_intent]
     payment = Stripe::PaymentIntent.retrieve(payment_id)
     listing_id = payment.metadata.listing_id
     user_id = payment.metadata.user_id
 
     #   Create listing in our Payment table
     trans = Payment.create(
-        user_id: user_id,
-        product_id: listing_id,
-        stripe_transaction_id: payment_id
+      user_id: user_id,
+      product_id: listing_id,
+      stripe_transaction_id: payment_id
     )
 
     # Here we update the purchase status boolean on our product to true, so that it no longer displays in Index
@@ -28,8 +28,6 @@ class PaymentsController < ApplicationController
     purchase_status = Product.find(listing_id)
     purchase_status.update(purchased: true)
     purchase_status.save
-    unless trans
-        link_to failure_payment_path
-    end
+    link_to failure_payment_path unless trans
   end
 end

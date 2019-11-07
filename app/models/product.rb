@@ -6,7 +6,7 @@ class Product < ApplicationRecord
 
   #   Scope methods for @products search & filter functionality
   #
-  scope :search, -> (search) { where("name like ?", "%#{search}%") }
-  scope :condition_id, -> (condition_id) { where condition_id: condition_id }
-  scope :category_id, -> (category_id) { where category_id: category_id}
+  scope :search, ->(search) { where('name like ?', "%#{search}%") }
+  scope :condition_id, ->(condition_id) { where condition_id: condition_id }
+  scope :category_id, ->(category_id) { where category_id: category_id }
 end

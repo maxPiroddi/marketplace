@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-
   def home
     #   Pick a random product to suggest to users
     #
