@@ -1,174 +1,163 @@
 class ProductsController < ApplicationController
-	before_action :authenticate_user!, except: [:index, :show]
-  	before_action :set_product, only: [:show]
-  	before_action :set_user_product, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_product, only: [:show]
+  before_action :set_user_product, only: [:edit, :update, :destroy]
 
-	#=======================================================================
+  #=======================================================================
 
-	def index
-		# Default display if no params are passed.
-		# @products = Product.paginate(page: params[:page], per_page: 10)
-		# 	.order("created_at desc")
-		# 	.where("purchased = false")
+  def index
+    # Default display if no params are passed. Includes page params for pagination via Kaminari Gem.
+    #
+    @products = Product.order("created_at desc").where("purchased = false").page params[:page]
 
-		@products = Product.order("created_at desc").where("purchased = false").page params[:page]
+    # Search logic -- Here we are searching w/ scopes defined in our method. Each of these allows us to filter what is found.
+    #
+    @products = @products.search(params[:search]) if params[:search].present?
+    @products = @products.condition_id(params[:condition_id]) if params[:condition_id].present?
+    @products = @products.category_id(params[:category_id]) if params[:category_id].present?
 
-		# Search logic -- Here we are searching w/ scopes defined in our method. Each of these allows us to filter what is found.
-		@products = @products.search(params[:search]) if params[:search].present?
-		@products = @products.condition_id(params[:condition_id]) if params[:condition_id].present?
-		@products = @products.category_id(params[:category_id]) if params[:category_id].present?
+  end
+  
+  def show
+    # Only run if user is able to purchase item
+    if user_signed_in? && current_user != @product.user
+      
+      #	Call private method to hit AusPost API
+      response = auspost_api_get
+      data = JSON.parse(response.body)
 
-	end
-	
-	def show
+      #	Generate variables required for view from API response
+      @delivery_cost = data["postage_result"]["total_cost"]
+      @delivery_time = data["postage_result"]["delivery_time"]
 
-		# Only run if user is able to purchase item
-		if user_signed_in? && current_user != @product.user
-			
-			#	Call private method to hit AusPost API
-			response = auspost_api_get
-			data = JSON.parse(response.body)
+      #	Generate cost of product + shipping for Stripe payment
+      @full_cost = @product.price + (@delivery_cost.to_f * 100)
+      
+      session = stripe_checkout
+      @session_id = session.id
+    end
+    
+  end
 
-			#	Generate variables required for view from API response
-			@delivery_cost = data["postage_result"]["total_cost"]
-			@delivery_time = data["postage_result"]["delivery_time"]
+  def new
+    #	Set our variables & create new
+    @product = Product.new
+    @categories = Category.all
+    @conditions = Condition.all
+  end
 
-			#	Generate cost of product + shipping for Stripe payment
-			@full_cost = @product.price + (@delivery_cost.to_f * 100)
-			
-			session = stripe_checkout
-			@session_id = session.id
-		end
-		
-	end
+  def edit
+    #	Set our variables
+    @categories = Category.all
+    @conditions = Condition.all
+  end
 
-	def new
+  def create
+    #	Create product w/ whitelisted params
+    @product = current_user.products.create(product_params)
+    
+    #	Automatically add users postcode as item location
+    @product.location = current_user.postcode
+    
+    #	Initialize product purchase status
+    @product.purchased = false
 
-		#	Set our variables & create new
-		@product = Product.new
-		@categories = Category.all
-		@conditions = Condition.all
-	end
+    #	Success/failure routing
+    if @product.save
+      redirect_to @product, notice: 'Product was successfully created.'
+    else
+      render :new
+    end
+  end
 
-	def edit
+  def update
+    #	Success/failure routing
+    if @product.update(product_params)
+    redirect_to @product, notice: "Product was successfully updated."
+    else
+    render :edit
+    end
+  end
 
-		#	Set our variables
-		@categories = Category.all
-		@conditions = Condition.all
-	end
+  def destroy
+    #	Call method to find product to be destroyed
+    @product = set_product
 
-	def create
+    #	Check we are destroying a real record
+    if @product.present?
+    @product.destroy
+    end
 
-		#	Create product w/ whitelisted params
-		@product = current_user.products.create(product_params)
-		
-		#	Automatically add users postcode as item location
-		@product.location = current_user.postcode
-		
-		#	Initialize product purchase status
-		@product.purchased = false
+    redirect_to products_url, notice: "Product was successfully destroyed."
+  end
 
-		#	Success/failure routing
-		if @product.save
-			redirect_to @product, notice: 'Product was successfully created.'
-		else
-			render :new
-		end
-		
-	end
+  #=======================================================================
 
-	def update
+  private
 
-		#	Success/failure routing
-		if @product.update(product_params)
-		redirect_to @product, notice: "Product was successfully updated."
-		else
-		render :edit
-		end
-		
-	end
+    # Find required product
+    def set_product
+      @product = Product.find(params[:id])
+    end
 
-	def destroy
+    # Never trust all parameters from the internet, only allow the white list through.
+    def product_params
+      params.require(:product).permit(:name, :price, :location, :description, :category_id, :condition_id, :picture)
+    end
 
-		#	Call method to find product to be destroyed
-		@product = set_product
+    # Ensure our product belongs to the correct user.
+    def set_user_product
+      @product = current_user.products.find_by_id(params[:id])
 
-		#	Check we are destroying a real record
-		if @product.present?
-		@product.destroy
-		end
+      if @product == nil
+        redirect_to products_path
+      end
+    end
+    
+    #	Define buyer/seller locations, submit GET request to AusPost API for shipping costs & time
+    def auspost_api_get
+      seller_postcode = @product.location
+      buyer_postcode = current_user.postcode
 
-		redirect_to products_url, notice: "Product was successfully destroyed."
-		
-	end
-
-	#=======================================================================
-
-	private
-
-		# Find required product
-		def set_product
-			@product = Product.find(params[:id])
-		end
-
-		# Never trust all parameters from the internet, only allow the white list through.
-		def product_params
-			params.require(:product).permit(:name, :price, :location, :description, :category_id, :condition_id, :picture)
-		end
-
-		# Ensure our product belongs to the correct user.
-		def set_user_product
-			@product = current_user.products.find_by_id(params[:id])
-
-			if @product == nil
-				redirect_to products_path
-			end
-		end
-		
-		#	Define buyer/seller locations, submit GET request to AusPost API for shipping costs & time
-		def auspost_api_get
-			seller_postcode = @product.location
-			buyer_postcode = current_user.postcode
-
-			#	Randomised data for API to get more interesting shipping details
-			length = rand(5..25)
-			width = rand(5..25)
-			height = rand(5..25)
-			weight = rand(1..10)
-		
-			#	AusPost Access KeyID located in Credentials.YML file for security
-			response = HTTP.headers("AUTH-KEY" => Rails.application.credentials.dig(:auspost, :access_key_id))
-			.get("https://digitalapi.auspost.com.au/postage/parcel/domestic/calculate.json", :params => {
-				:length => "#{length}", 
-				:width => "#{width}", 
-				:height => "#{height}", 
-				:weight => "#{weight}", 
-				:from_postcode => "#{seller_postcode}", 
-				:to_postcode => "#{buyer_postcode}", 
-				:service_code => "AUS_PARCEL_REGULAR"})
-		
-		end
-		
-		#	Session creation & storage
-		def stripe_checkout
-			session = Stripe::Checkout::Session.create(
-				payment_method_types: ['card'],
-				customer_email: current_user.email,
-				line_items: [{
-					name: @product.name,
-					description: @product.description,
-					amount: @full_cost.to_i,
-					currency: 'aud',
-					quantity: 1,
-				}],
-				payment_intent_data: {
-					metadata: {
-						user_id: current_user.id,
-						listing_id: @product.id
-					}
-				},
-				success_url: "#{root_url}payments/success",
-				cancel_url: "#{root_url}products"
-			)
-		end
+      #	Randomised data for API to get more interesting shipping details
+      length = rand(5..25)
+      width = rand(5..25)
+      height = rand(5..25)
+      weight = rand(1..10)
+    
+      #	AusPost Access KeyID located in Credentials.YML file for security
+      response = HTTP.headers("AUTH-KEY" => Rails.application.credentials.dig(:auspost, :access_key_id))
+      .get("https://digitalapi.auspost.com.au/postage/parcel/domestic/calculate.json", :params => {
+        :length => "#{length}", 
+        :width => "#{width}", 
+        :height => "#{height}", 
+        :weight => "#{weight}", 
+        :from_postcode => "#{seller_postcode}", 
+        :to_postcode => "#{buyer_postcode}", 
+        :service_code => "AUS_PARCEL_REGULAR"
+      })
+    end
+    
+    #	Session creation & storage
+    def stripe_checkout
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+          name: @product.name,
+          description: @product.description,
+          amount: @full_cost.to_i,
+          currency: 'aud',
+          quantity: 1,
+        }],
+        payment_intent_data: {
+          metadata: {
+            user_id: current_user.id,
+            listing_id: @product.id
+          }
+        },
+        success_url: "#{root_url}payments/success",
+        cancel_url: "#{root_url}products"
+      )
+    end
 end
