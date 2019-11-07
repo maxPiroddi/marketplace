@@ -83,3 +83,7 @@ gem "down", "~> 5.0"
 gem "http", "~> 4.2"
 
 gem "ultrahook", "~> 0.1.5"
+
+gem "will_paginate", "~> 3.2"
+
+gem "kaminari", "~> 1.1"

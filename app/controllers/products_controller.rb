@@ -7,7 +7,11 @@ class ProductsController < ApplicationController
 
 	def index
 		# Default display if no params are passed.
-		@products = Product.where("purchased = false").order("created_at desc")
+		# @products = Product.paginate(page: params[:page], per_page: 10)
+		# 	.order("created_at desc")
+		# 	.where("purchased = false")
+
+		@products = Product.order("created_at desc").where("purchased = false").page params[:page]
 
 		# Search logic -- Here we are searching w/ scopes defined in our method. Each of these allows us to filter what is found.
 		@products = @products.search(params[:search]) if params[:search].present?
