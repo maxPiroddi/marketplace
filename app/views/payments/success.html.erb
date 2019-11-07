@@ -1,9 +1,8 @@
 <%= render("shared/topnav") %>
 <div class="container">
     <div class=".col-xs-12 .col-md-8 success">
-        <div class="success-details">
+        <div>
             <h1>Purchase success!</h1>
-            <p>Estimated delivery timeframe: 
             <p><strong>Your order number is: <%= @purchase.id %></strong></p>
             <p>Transaction ID: <%= @purchase.stripe_transaction_id %></p>
             <p>For any queries regarding your item, please contact <strong><%= @product.user.email %></strong></p>

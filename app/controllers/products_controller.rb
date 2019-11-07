@@ -66,9 +66,9 @@ class ProductsController < ApplicationController
 
 		#	Success/failure routing
 		if @product.save
-		redirect_to @product, notice: 'Product was successfully created.'
+			redirect_to @product, notice: 'Product was successfully created.'
 		else
-		render :new
+			render :new
 		end
 		
 	end

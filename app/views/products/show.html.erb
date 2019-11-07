@@ -45,7 +45,9 @@
           </div>
     
           <div class="product-image-box">
-            <%= image_tag((@product.picture if @product.picture.attached?), class: "image-box")%>
+            <% if @product.picture.attached? %>
+              <%= image_tag((@product.picture), class: "image-box")%>
+            <% end %>
           </div>
         </div>
     </div>
