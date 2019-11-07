@@ -5,7 +5,7 @@ conditions = Condition.create([
   { name: "Fair", description: "Fair items generally work, however, may have some minor functional or cosmetic issues." },
   { name: "Good", description: "Good items are generally in good working order, however, may have some cosmetic blemishes." },
   { name: "Excellent", description: "Excellent gear is in almost-new condition, free of blemishes and heavy use." }
-]
+])
 
 categories = Category.create([
   { name: "Guitar", description: "Electric & Acoustic guitars." },
