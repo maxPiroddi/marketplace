@@ -1,0 +1,21 @@
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #6fa0cb;
+  color: white;
+
+  p {
+    margin-bottom: 0px;
+  }
+}
+.col-md-12 {
+  left: 0;
+  bottom: 0;
+}
+@media (min-width: 700px) {
+  .footer {
+    text-align: center;
+  }
+}

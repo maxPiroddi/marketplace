@@ -1,8 +1,11 @@
 <%= render("shared/topnav") %>
-<div class="container">
-  <p id="notice"><%= notice %></p>
 
+<div class="container">
+
+  <p id="notice"><%= notice %></p>
+  
   <div class="row index-row">
+    <h2>Displaying <%= @products.count %> results.</h2>
     <div>
       <%= form_with url: products_path, method: "get", local: true, :html => {class: "filter-form"} do |form| %>
         
@@ -19,9 +22,6 @@
         <%= form.submit "Filter Listings", class: "btn btn-default btn-xs field" %>
 
       <% end %>
-    </div>
-    <div>
-      <%= paginate @products %>
     </div>
   </div>
 
@@ -41,4 +41,10 @@
       </div>
     <% end %>
   </div>
+  <div>
+    <%= paginate @products %>
+  </div>
+
 </div>
+
+<%= render("shared/footer") %>

@@ -19,14 +19,18 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
 body {
-    background-color: #b3cee6;
+    background-color: #c7d9e9;
+    height: 100%;
 }
 .navbar-toggle .icon-bar {
     background-color: #052B54;
 }
-
+.navbar {
+    margin-bottom: 0;
+}
 .navbar .navbar-light {
     background-color: #f8f8f8;
+    margin-bottom: 0px;
 }
 
 .navbar-brand {
@@ -36,16 +40,6 @@ body {
 
 .container .form-container {
     width: 60%;
-}
-
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #6fa0cb;
-    color: white;
-    text-align: center;
 }
 
 .success {
