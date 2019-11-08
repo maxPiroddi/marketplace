@@ -18,7 +18,7 @@ categories = Category.create([
 
 for i in 1..80
   user = User.new(
-    name: Faker::Name.unique.name,
+    name: Faker::Name.first_name + " " + Faker::Name.last_name,
     email: Faker::Internet.email,
     password: "password",
     postcode: rand(1000..4999),
@@ -34,17 +34,16 @@ for i in 1..100
   condition = Condition.order('RANDOM()').first
 
   prod = Product.new(
-    name: Faker::Beer.name,
+    name: (Faker::Company.name) + " " + (Faker::Music.instrument),
     price: rand(5000..99900),
     location: rand(1000..4999),
-    description: Faker::Lorem.sentence,
+    description: Faker::Quotes::Shakespeare.hamlet_quote,
     user_id: user.id,
     category_id: category.id,
     condition_id: condition.id,
     purchased: false
   )
-
-  temp_prod_file = Down.download(Faker::LoremPixel.image + "?random=" + rand(1..1000).to_s)
+  temp_prod_file = Down.download(Faker::LoremFlickr.image(size: "300x300", search_terms: ['music', 'instrument']))
   prod.picture.attach(io: temp_prod_file, filename: File.basename(temp_prod_file.path))
 
   prod.save!
