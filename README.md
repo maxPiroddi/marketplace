@@ -1,12 +1,10 @@
 # README - Documentation
 
-## A link (URL) to your deployed app (i.e. website)
+![documentation-header](https://user-images.githubusercontent.com/37489963/68439531-fd951580-021b-11ea-9a56-258b172ebb55.jpg)
 
-## A link to your GitHub repository (repo)
+[Live Website](http://musos-market.herokuapp.com/)
 
 [GitHub Repository](https://github.com/maxPiroddi/marketplace)
-
-***
 
 ***
 

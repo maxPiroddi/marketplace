@@ -5,7 +5,7 @@
   <p id="notice"><%= notice %></p>
   
   <div class="row index-row">
-    <h2>Displaying <%= @products.count %> results.</h2>
+    <h2>Displaying <%= @products.count %> of <%= @total_count %> results.</h2>
     <div>
       <%= form_with url: products_path, method: "get", local: true, :html => {class: "filter-form"} do |form| %>
         
