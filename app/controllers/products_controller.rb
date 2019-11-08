@@ -8,7 +8,6 @@ class ProductsController < ApplicationController
   def index
     # Default display if no params are passed. Includes page params for pagination via Kaminari Gem.
     #
-    @total_count = Product.all.count
     @products = Product.order('created_at desc').where('purchased = false').page params[:page]
 
     # Search logic -- Here we are searching w/ scopes defined in our method. Each of these allows us to filter what is found.
