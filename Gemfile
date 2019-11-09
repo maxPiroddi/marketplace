@@ -58,7 +58,7 @@ gem 'down', '~> 5.0'
 # Used to manually hit AusPost API w/ GET request
 gem 'http', '~> 4.2'
 
-# Webhooks for stripe
+# Webhooks for stripe used during development.
 gem 'ultrahook', '~> 0.1.5'
 
 # Pagination of Index page

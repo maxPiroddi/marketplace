@@ -7,6 +7,7 @@
         <%= form_with url: products_path, method: "GET", local: true do |form| %>
             <%= form.text_field :search, class: "form-control", id: "hero-search", placeholder: "Search..." %>
         <% end %>
+        <p class="random-product"><%= link_to("View All Listings", products_path) %></p>
         <p class="random-product"><%= link_to("Maybe try '#{@random_product.name}'", product_path(@random_product)) %></p>
     </div>
     <div class="category-box">
