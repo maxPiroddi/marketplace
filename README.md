@@ -132,6 +132,14 @@ The application is built with Ruby on Rails (5.2.3), primarily using HTML, CSS (
 
 ![db-schema](https://user-images.githubusercontent.com/37489963/68442342-d0009a00-0224-11ea-8104-8646bbe35bf1.jpg)
 
+### Site Screenshots
+
+![homepage](https://user-images.githubusercontent.com/37489963/68539076-fdd71180-03d1-11ea-886e-343b0b694046.png)
+![show-page](https://user-images.githubusercontent.com/37489963/68539077-fdd71180-03d1-11ea-9c70-8fbb1db2d4d5.png)
+![new-item](https://user-images.githubusercontent.com/37489963/68539079-fdd71180-03d1-11ea-817b-ab198ccff2b2.png)
+![account](https://user-images.githubusercontent.com/37489963/68539080-fe6fa800-03d1-11ea-8f09-069fb92ba00b.png)
+![index](https://user-images.githubusercontent.com/37489963/68539081-fe6fa800-03d1-11ea-8bfb-2c710315c948.png)
+
 ***
 
 ***
