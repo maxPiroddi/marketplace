@@ -67,8 +67,8 @@ The application is built with Ruby on Rails (5.2.3), primarily using HTML, CSS (
 
 **As an *account holder*, I need to have a secure account with the marketplace so that I may protect my personal information.**
 
-- As a account holder, I need to have a secure log-in system so that I know my personal and financial information is secure while using the site.
-- As a account holder, I need to have the ability to easily navigate my account details and update them when necessary.
+- As an account holder, I need to have a secure log-in system so that I know my personal and financial information is secure while using the site.
+- As an account holder, I need to have the ability to easily navigate my account details and update them when necessary.
 
 **As a *vendor*, I need to easily list items and track active listings so that I can manage my inventory efficiently.**
 
