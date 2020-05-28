@@ -62,4 +62,4 @@ gem 'http', '~> 4.2'
 gem 'ultrahook', '~> 0.1.5'
 
 # Pagination of Index page
-gem 'kaminari', '~> 1.1'
+gem 'kaminari', '~> 1.2'
